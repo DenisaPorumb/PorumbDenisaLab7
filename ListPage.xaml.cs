@@ -29,6 +29,21 @@ public partial class ListPage : ContentPage
 			BindingContext = new Product()
 		});
 	}
+	async void OnDeleteItemClicked(object sender, EventArgs e)
+	{
+        var product = listView.SelectedItem as Product;
+        await App.Database.DeleteProductAsync(product);
+        listView.ItemsSource = await App.Database.GetProductsAsync();
+    }
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                listView.SelectedItem = e.SelectedItem;
+            }
+        }
+
+
     protected override async void OnAppearing() 
 	{
 		base.OnAppearing(); 
@@ -36,3 +51,4 @@ public partial class ListPage : ContentPage
 		listView.ItemsSource = await App.Database.GetListProductsAsync(shopl.ID);
 	}
 }
+

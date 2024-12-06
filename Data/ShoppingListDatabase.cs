@@ -34,6 +34,7 @@ namespace PorumbDenisaLab7.Data
         { 
             return _database.DeleteAsync(product);
         }
+       
         public Task<List<Product>> GetProductsAsync()
         { 
             return _database.Table<Product>().ToListAsync();
@@ -83,6 +84,11 @@ namespace PorumbDenisaLab7.Data
         {
             return _database.DeleteAsync(slist); 
         }
+        public Task<int> DeleteListProductAsync(ListProduct listp)
+        {
+            return _database.DeleteAsync(listp);
+        }
+
     }
 }
 
